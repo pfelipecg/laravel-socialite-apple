@@ -1,0 +1,24 @@
+{
+    "name": "seuappaqui/laravel-socialite-apple",
+    "description": "An Apple Socialite Login Provider",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruno Pontes",
+            "email": "brunocrpontes.dev@gmail.com"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "ext-json": "*",
+        "socialiteproviders/manager": "~2.0 || ~3.0",
+        "codercat/jwk-to-pem": "^0.0.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "SeuAppAqui\\": "./source"
+        }
+    }
+}
