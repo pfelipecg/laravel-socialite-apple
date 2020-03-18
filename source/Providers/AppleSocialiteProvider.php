@@ -104,9 +104,16 @@ class AppleSocialiteProvider extends AbstractProvider implements ProviderInterfa
     return $this->clientId === $audience;
   }
 
-  protected function getUserByToken(string $token): array
+  protected function getClaims(string $token)
   {
-    $claims = explode('.', $token)[1];
+    $payload = explode('.', $token)[1];
+
+    return json_decode($payload);
+  }
+
+  protected function getUserByToken($token): array
+  {
+    $claims = $this->getClaims($token);
 
     if ($this->isISSInvalid($claims['iss'])) {
       throw new InvalidTokenException("The registered issuer doesn't match with apple issuer", Response::HTTP_UNAUTHORIZED);
@@ -120,7 +127,7 @@ class AppleSocialiteProvider extends AbstractProvider implements ProviderInterfa
       throw new InvalidTokenException("Token expired.", Response::HTTP_UNAUTHORIZED);
     }
 
-    return json_decode($claims, true);
+    return $claims;
   }
 
   protected function mapUserToObject(array $user)
