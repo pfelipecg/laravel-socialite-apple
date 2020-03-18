@@ -4,7 +4,6 @@ namespace SeuAppAqui\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Socialite\Contracts\Factory;
-use SeuAppAqui\Socialite\Providers\AppleSocialiteProvider;
 use SocialiteProviders\Manager\Exception\MissingConfigException;
 
 class AppleServiceProvider extends ServiceProvider
@@ -21,7 +20,7 @@ class AppleServiceProvider extends ServiceProvider
     $socialite->extend(
       'apple',
       function ($app) use ($socialite) {
-        $config = $app['config']['apple'];
+        $config = $app['config']['services.apple'];
 
         if (!$config) throw new MissingConfigException("Not found apple configuration in services.php file.");
 

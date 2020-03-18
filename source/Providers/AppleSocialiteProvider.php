@@ -89,9 +89,9 @@ class AppleSocialiteProvider extends AbstractProvider implements ProviderInterfa
     return array_merge($fields, $this->parameters);
   }
 
-  private function isISSValid(string $iss): bool
+  private function isISSInvalid(string $iss): bool
   {
-    return $iss === self::URL;
+    return $iss !== self::URL;
   }
 
   private function isTokenExpired(string $timestamp): bool
@@ -99,7 +99,7 @@ class AppleSocialiteProvider extends AbstractProvider implements ProviderInterfa
     return Carbon::createFromTimestamp($timestamp)->isPast();
   }
 
-  private function isAudienceValid(string $audience)
+  private function isAudienceInvalid(string $audience)
   {
     return $this->clientId === $audience;
   }
@@ -108,11 +108,11 @@ class AppleSocialiteProvider extends AbstractProvider implements ProviderInterfa
   {
     $claims = explode('.', $token)[1];
 
-    if ($this->isISSValid($claims['iss'])) {
+    if ($this->isISSInvalid($claims['iss'])) {
       throw new InvalidTokenException("The registered issuer doesn't match with apple issuer", Response::HTTP_UNAUTHORIZED);
     }
 
-    if ($this->isAudienceValid($claims['aud'])) {
+    if ($this->isAudienceInvalid($claims['aud'])) {
       throw new InvalidTokenException("Invalid client.", Response::HTTP_UNAUTHORIZED);
     }
 
