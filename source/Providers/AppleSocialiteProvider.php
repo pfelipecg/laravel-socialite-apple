@@ -108,10 +108,10 @@ class AppleSocialiteProvider extends AbstractProvider implements ProviderInterfa
   {
     $payload = explode('.', $token)[1];
 
-    return json_decode($payload);
+    return json_decode($payload, true);
   }
 
-  protected function getUserByToken($token): array
+  protected function getUserByToken($token)
   {
     $claims = $this->getClaims($token);
 
