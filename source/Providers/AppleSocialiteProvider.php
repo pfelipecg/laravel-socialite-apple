@@ -2,13 +2,13 @@
 
 namespace SeuAppAqui\Providers;
 
-use Exceptions\InvalidTokenException;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
+use Laravel\Socialite\Two\User;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\ProviderInterface;
-use Laravel\Socialite\Two\User;
-use Illuminate\Support\Arr;
+use SeuAppAqui\Exceptions\InvalidTokenException;
 
 class AppleSocialiteProvider extends AbstractProvider implements ProviderInterface
 {
