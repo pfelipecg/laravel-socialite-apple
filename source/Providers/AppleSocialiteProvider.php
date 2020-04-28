@@ -101,7 +101,7 @@ class AppleSocialiteProvider extends AbstractProvider implements ProviderInterfa
 
   private function isAudienceInvalid(string $audience)
   {
-    return $this->clientId === $audience;
+    return $this->clientId !== $audience;
   }
 
   protected function getClaims(string $token): array
